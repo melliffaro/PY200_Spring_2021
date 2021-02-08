@@ -93,7 +93,6 @@ class LinkedList:
             for _ in range(self.__len - 1):
                 tail = tail.next
             self.__linked_nodes(tail, append_node)
-
         self.__len += 1
 
     @staticmethod
@@ -112,7 +111,7 @@ class LinkedList:
             self.head = insert_node
             self.__len += 1
         elif 1 <= index < self.__len:
-            prev_node = self.__step_by_step_on_nodes(index-1)
+            prev_node = self.__step_by_step_on_nodes(index - 1)
             current_node = prev_node.next
             insert_node = self.Node(value, next_=current_node)
             self.__linked_nodes(prev_node, insert_node)  # prev.next = insert_node
@@ -165,7 +164,7 @@ if __name__ == '__main__':
     l1.insert(0, 'value')
     print(l1)
 
-    l1.insert(len(l1)-1, 'last_value')
+    l1.insert(len(l1) - 1, 'last_value')
     print(l1)
 
     l1.insert(len(l1), 'append_value')

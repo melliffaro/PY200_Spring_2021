@@ -2,14 +2,17 @@
 Сделать DoubleLinkedNode наследуясь от класса Node
 
     1. В конструкторе DoubleLinkedNode обязательно вызвать конструктор базоваго класса и определить дополнительный
-        атрибут self.prev, хранищий в себе ссылку на предыдущий узел
+        атрибут self.prev, хранящий в себе ссылку на предыдущий узел. Тем сымым дополняя функциональность базового класса,
+        сохраняя его логику.
     2. Атрибут экземпляра prev сделать свойством prev. Определить для него getter и setter c проверками аналогичными
-        свойству next в класса Node
+        свойству next в класса Node.
     3. В классе Node вынести проверку присваемого узла в setter свойства next во внутренний метод.
+        Данный метод должен быть внутренним и не доступным пользователю.
     4. В классе DoubleLinkedNode воспользоваться методом из прошлого шага, чтобы проверить setter свойства prev.
         Каким должен быть этот метод?
             - protected
             - private
+    5. Для DoubleLinkedNode перегрузить метод __repr__, метод __str__ оставить без изменений.
 """
 from typing import Any, Optional
 
@@ -58,29 +61,21 @@ class DoubleLinkedNode(Node):
     def __init__(self, value: Any,
                  next_: Optional['Node'] = None,
                  prev: Optional['Node'] = None):
-        super().__init__(value, next_)
-        self.prev = prev
+        # ToDo расширить возможности базового конструтора с учетом особенностей двусвязного списка
+        ...
 
-    @property
-    def prev(self):
-        return self.__prev
-
-    @prev.setter
-    def prev(self, prev: Optional['Node']):
-        if not isinstance(prev, self.__class__) and prev is not None:
-            msg = f"Устанавливаемое значение должно быть экземпляром класса {self.__class__.__name__} " \
-                  f"или None, не {prev.__class__.__name__}"
-            raise TypeError(msg)
-        self.__prev = prev
-
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Метод должен возвращать строку, показывающую, как может быть создан экземпляр."""
-        return f"Node({self.value}, next_={None}, prev={None})"
+        # ToDo перегрузить метод
+        ...
 
 
 if __name__ == '__main__':
     first_node = DoubleLinkedNode(5)
     second_node = DoubleLinkedNode(10)
+
+    print(repr(first_node))
+    print(repr(second_node))
 
     head = first_node
     first_node.next = second_node

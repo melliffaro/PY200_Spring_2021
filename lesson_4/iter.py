@@ -1,3 +1,11 @@
+"""
+    Выбрать экземпляры класса LinkedList будут итераторами или итерируемыми объектами.
+    и уметь обосновать(!) это (https://colab.research.google.com/drive/12UErjm9lm31DPEFSxcyrH47LUX5oRwyH#scrollTo=z_-otPpGrQTs)
+
+    В соответвии с понятным и знакомым выбранным решением реализовать соответвующие методы.
+    Можно пользоваться любыми готовыми итераторами, функциями-генераторами, самостоятельно реализовывать метод __next__.
+"""
+
 from typing import Any, Sequence, Optional
 
 
@@ -40,6 +48,9 @@ class LinkedList:
         def __str__(self):
             """Вызывается функциями str, print и format. Возвращает строковое представление объекта."""
             return f"{self.value}"
+
+        def __del__(self):
+            print(f"Удален узел {self}")
 
     def __init__(self, data: Sequence = None):
         """Конструктор связного списка"""
@@ -97,13 +108,12 @@ class LinkedList:
     def __linked_nodes(left: Node, right: Optional[Node]) -> None:
         left.next = right
 
-    def __iter__(self):  # ToDo
-        ...
-
-    def __next__(self):
+    def __iter__(self):  # ToDo перегрузить метод для работы с циклом for
+        print('Вызван метод __iter__')
         ...
 
 
 if __name__ == '__main__':
     ll = LinkedList([1, 2, 3, 4, 5])
-
+    for value in ll:
+        print(value)

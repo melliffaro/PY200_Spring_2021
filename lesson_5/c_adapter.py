@@ -1,12 +1,30 @@
-from typing import Any
+"""
+Реализовать паттерн "Адаптер".
+    1. Для NumpyAdapter и DictAdapter реализовать метод index, который будет производить поиск поиск элемента.
+"""
+
+from typing import Any, Union
 
 import numpy as np
 
 
 class ServerClass:
-    """Код на стороне сервера менять не можем. Сервер выполняет вычисления очень быстро."""
+    """
+    Код на стороне сервера менять не можем.
+    Сервер выполняет вычисления очень быстро, поэтому все операции делаем на нем.
+    """
 
-    def find(self, data: list, value: Any) -> int:
+    @staticmethod
+    def find(data: Union[list, 'NumpyAdapter', dict], value: Any) -> int:
+        """
+        Сервер умеет вызывать только один метод index у объекта.
+
+        :param data: Объект, в котором производится поиск
+        :param value: Значение, индекс которого необходимо найти
+        :return: Индекс искомого элемента
+
+        :raise ValueError: f"{value} is not in {object_class_name}"
+        """
         return data.index(value)
 
 

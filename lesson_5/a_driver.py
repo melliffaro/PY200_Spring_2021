@@ -32,5 +32,9 @@ class JsonFileDriver(IStructureDriver):
     ...
 
 
+class SimpleFileDriver(IStructureDriver):
+    ...
+
+
 if __name__ == '__main__':
     ...

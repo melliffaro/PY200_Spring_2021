@@ -4,8 +4,8 @@ import sqlite3
 
 class DatabaseContextManager(ABC):
     @abstractmethod
-    def __init__(self, driver, config: dict):
-        self.__db_driver = driver
+    def __init__(self, db_driver, config: dict):
+        self.__db_driver = db_driver
         self.config = config
 
     def __enter__(self):

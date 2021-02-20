@@ -34,9 +34,6 @@ class DatabaseContextManager(ABC):
         print("Закрываем соединение с БД!")
         self.conn.close()
 
-    def execute(self, sql):  # ToDo after simple_sql
-        ...
-
 
 class SqliteDB(DatabaseContextManager):
     DEFAULT_DATABASE = "db.sqlite3"

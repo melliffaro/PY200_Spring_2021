@@ -87,25 +87,27 @@ class BookLibrary:
         with self.__driver as cursor:  # использование менеджера контекста для выполнения запроса
             cursor.executemany(sql, self.book_generator(count))
 
-    def get_book_by_year(self, year):
+    def get_book_by_year(self, year: int) -> Iterator:
         sql = f"""
         SELECT *
         FROM {self.BOOKS_TABLE}
-        WHERE year = {year}
+        WHERE year = {year};
         """
 
         with self.__driver as cursor:
-            return cursor.execute(sql)
+            for row in cursor.execute(sql):
+                yield row
 
-    def get_book_by_title(self, title):
-        ...
+    def get_book_by_price_less(self, price: float):
+        sql = f"""
+        SELECT *
+        FROM {self.BOOKS_TABLE}
+        WHERE price < {price}
+        ORDER BY year;
+        """
 
-    def get_book_by_price(self, price):
-        ...
-
-    def insert(self):
-        # cur.executemany("insert into characters(c) values (?)", theIter)
-        ...
+        with self.__driver as cursor:
+            return cursor.execute(sql).fetchall()
 
 
 if __name__ == '__main__':
@@ -117,4 +119,10 @@ if __name__ == '__main__':
     # for book in library.book_generator():
     #     print(book)
 
-    library.init_books(100)
+    # library.init_books(100)
+
+    # for book in library.get_book_by_year(2009):
+    #     print(book)
+
+    print(library.get_book_by_price_less(1000))
+

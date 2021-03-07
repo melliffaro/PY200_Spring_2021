@@ -25,6 +25,8 @@
 
 # ToDo импорт любой вашей реалиазации LinkedList
 
+from Link_list import LinkedList
+
 
 class DoubleLinkedList(...):
     class DoubleLinkedNode(...):

@@ -23,7 +23,6 @@ class Node:
 
     Пользователь напрямую не работает с узлами списка, узлами оперирует список.
     """
-
     def __init__(self, value: Any, next_: Optional['Node'] = None):
         """
         Создаем новый узел для односвязного списка
@@ -61,8 +60,10 @@ class DoubleLinkedNode(Node):
     def __init__(self, value: Any,
                  next_: Optional['Node'] = None,
                  prev: Optional['Node'] = None):
+        self.first = None
+        self.last = None
         # ToDo расширить возможности базового конструтора с учетом особенностей двусвязного списка
-        ...
+
 
     def __repr__(self) -> str:
         """Метод должен возвращать строку, показывающую, как может быть создан экземпляр."""

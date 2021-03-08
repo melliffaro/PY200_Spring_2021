@@ -6,6 +6,9 @@
 
 from typing import Sequence
 from abc import ABC, abstractmethod
+import json
+import pickle
+import yaml
 
 
 class IStructureDriver(ABC):
@@ -29,12 +32,58 @@ class IStructureDriver(ABC):
 
 
 class JsonFileDriver(IStructureDriver):
-    ...
+    def __init__(self, filename: str):
+        self._filename = filename
+
+    def read(self) -> Sequence:
+        with open(self._filename) as file:
+            return json.load(file)
+
+    def write(self, data: Sequence) -> None:
+        with open(self._filename, "w") as file:
+            json.dump(data, file)
 
 
 class SimpleFileDriver(IStructureDriver):
-    ...
+    def __init__(self, filename: str):
+        self._filename = filename
 
+    def read(self) -> Sequence:
+        with open(self._filename, 'rb') as file:
+            return pickle.load(file)
+
+    def write(self, data: Sequence) -> None:
+        with open(self._filename, 'wb') as file:
+            pickle.dump(data, file)
+
+class YamlFileDriver(IStructureDriver):
+    def __init__(self, filename: str):
+        self._filename = filename
+
+    def read(self) -> Sequence:
+        with open(self._filename) as file:
+            return yaml.load(file, yaml.SafeLoader)
+
+    def write(self, data: Sequence) -> None:
+        with open(self._filename, "w") as file:
+            yaml.dump(data, file)
+
+def main():
+    driver: IStructureDriver = JsonFileDriver("some.json")
+
+    a = [1, 2, 3, 4]
+    driver.write(a)
+
+    print(driver.read())
+
+    driver: IStructureDriver = SimpleFileDriver("some.json")
+    driver.write(a)
+
+    print(driver.read())
+    driver: IStructureDriver = YamlFileDriver("some.yaml")
+    driver.write(a)
+
+    print(driver.read())
 
 if __name__ == '__main__':
-    ...
+    main()

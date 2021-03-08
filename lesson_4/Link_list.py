@@ -2,9 +2,10 @@ from typing import Any, Optional
 
 
 class Node:
-    def __init__(self, data: Any, next_node: Optional["Node"] = None):
+    def __init__(self, data: Any,  next_node: Optional["Node"] = None):
         self.data = data
         self.next_node = next_node
+
 
     def __str__(self):
         return f"({self.data})"
@@ -61,9 +62,9 @@ class LinkedListIterator:
 
 
 class LinkedList:
-    def __init__(self):
-        self.head = None
-        self._size = 0
+    def __init__(self, head=None,  _size=0):
+        self.head = head
+        self._size = _size
 
     def __str__(self):
         return "->".join(str(node) for node in self._node_iter())
@@ -157,15 +158,15 @@ class LinkedList:
                     node.next_node = node.next_node.next_node
 
 
-ll = LinkedList()
-ll.append("a")
-ll.append("b")
-ll.append("c")
-ll.append("d")
-ll.append("e")
-print(ll)
-ll[2] = "g"
-print(ll)
+# ll = LinkedList()
+# ll.append("a")
+# ll.append("b")
+# ll.append("c")
+# ll.append("d")
+# ll.append("e")
+# print(ll)
+# ll[2] = "g"
+# print(ll)
 # ll.insert("6", 5)
 # ll.insert("6", 2)
 # ll.insert("6", 0)
